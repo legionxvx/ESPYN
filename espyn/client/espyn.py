@@ -6,6 +6,7 @@ from requests import Session
 class Sport(object):
     FOOTBALL = "football"
 
+
 class League(object):
     COLLEGE_FOOTBALL = "college-football"
 
@@ -41,8 +42,8 @@ class ESPYN(Session):
     def prefix(self):
         return self.multijoin(
             # Hardcoded for now
-            "https://site.api.espn.com/apis/site/v2/sports/", 
-            self.league, 
+            "https://site.api.espn.com/apis/site/v2/sports/",
+            self.league,
             self.sport
         )
 

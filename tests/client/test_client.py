@@ -1,5 +1,6 @@
 from espyn.client import ESPYN
 
+
 def test_espyn_client_basic():
     espyn = ESPYN()
     espyn.sport = "quidditch"
