@@ -1,1 +1,1 @@
-![Python package](https://github.com/legionxvx/nest/workflows/Python%20package/badge.svg)
+![Python package](https://github.com/legionxvx/ESPYN/workflows/Python%20package/badge.svg)
