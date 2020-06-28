@@ -5,10 +5,17 @@ from requests import Session
 
 class Sport(object):
     FOOTBALL = "football"
+    BASEBALL = "baseball"
+    BASKETBALL = "basketball"
 
 
 class League(object):
+    
+    NFL = "nfl"
+    XFL = "xfl"
     COLLEGE_FOOTBALL = "college-football"
+
+
 
 
 class ESPYN(Session):
@@ -25,6 +32,7 @@ class ESPYN(Session):
     @league.setter
     def league(self, value):
         self._league = value
+        return self._league
 
     @property
     def sport(self):
@@ -33,6 +41,7 @@ class ESPYN(Session):
     @sport.setter
     def sport(self, value):
         self._sport = value
+        return self._sport
 
     @staticmethod
     def multijoin(url, *parts, seperator="/"):
