@@ -3,10 +3,10 @@ from urllib.parse import urljoin
 from requests import Session
 
 
-class League(object):
+class Sport(object):
     FOOTBALL = "football"
 
-class Sport(object):
+class League(object):
     COLLEGE_FOOTBALL = "college-football"
 
 
