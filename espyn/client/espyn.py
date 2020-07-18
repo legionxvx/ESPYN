@@ -10,33 +10,20 @@ class Sport(object):
 
 
 class League(object):
-    
     NFL = "nfl"
     XFL = "xfl"
     COLLEGE_FOOTBALL = "college-football"
 
 
-
-
 class ESPYN(Session):
 
-    def __init__(self, league=None, sport=None):
+    def __init__(self, sport=None):
         super().__init__()
-        self._league = league
         self._sport = sport
 
     @property
-    def league(self):
-        return self._league or ""
-
-    @league.setter
-    def league(self, value):
-        self._league = value
-        return self._league
-
-    @property
     def sport(self):
-        return self._sport or ""
+        return self._sport
 
     @sport.setter
     def sport(self, value):
@@ -52,8 +39,8 @@ class ESPYN(Session):
         return self.multijoin(
             # Hardcoded for now
             "https://site.api.espn.com/apis/site/v2/sports/",
-            self.league,
-            self.sport
+            self.sport.league,
+            self.sport.name
         )
 
     def request(self, method, suffix, *args, **kwargs):
