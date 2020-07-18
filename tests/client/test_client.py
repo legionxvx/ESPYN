@@ -7,3 +7,9 @@ def test_espyn_client_basic():
     fb = Football()
     assert(fb.league in espyn.prefix)
     assert(fb.name in espyn.prefix)
+
+def test_client_get():
+    espyn = ESPYN(sport=Football())
+    res = espyn.get("scoreboard")
+    json = res.json()
+    assert(json is not None)
