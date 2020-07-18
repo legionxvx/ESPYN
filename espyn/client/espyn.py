@@ -39,8 +39,8 @@ class ESPYN(Session):
         return self.multijoin(
             # Hardcoded for now
             "https://site.api.espn.com/apis/site/v2/sports/",
-            self.sport.league,
-            self.sport.name
+            self.sport.name,
+            self.sport.league
         )
 
     def request(self, method, suffix, *args, **kwargs):
