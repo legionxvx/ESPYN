@@ -1,5 +1,12 @@
+from enum import IntEnum, auto
+
 from espyn.sports.base import Sport
 
+
+class SeasonType(IntEnum):
+    PRESEASON = 1
+    REGULAR = 2
+    BOWLS = 3
 
 class Football(Sport):
 
@@ -17,6 +24,8 @@ class Football(Sport):
 
         if self.leagues:
             self._league = self.leagues[0]
+
+        self.season = SeasonType.REGULAR
 
     @property
     def league(self):
