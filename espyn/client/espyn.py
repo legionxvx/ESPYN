@@ -46,3 +46,6 @@ class ESPYN(Session):
     def request(self, method, suffix, *args, **kwargs):
         url = urljoin(self.prefix, suffix)
         return super().request(method, url, *args, **kwargs)
+
+    def get_scoreboard(self, *args, **kwargs):
+        return self.get("scoreboard", *args, **kwargs)

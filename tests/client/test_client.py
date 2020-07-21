@@ -1,6 +1,6 @@
 from espyn.client import ESPYN
 from espyn.sports import Football
-
+from json import dumps
 
 def test_espyn_client_basic():
     espyn = ESPYN(sport=Football())
@@ -19,3 +19,12 @@ def test_client_get():
     res = espyn.get("scoreboard")
     json = res.json()
     assert(json is not None)
+
+
+def test_client_get_scoreboard():
+    espyn = ESPYN(sport=Football())
+    res = espyn.get_scoreboard()
+    json = res.json()
+    with open("scoreboard.json", "w") as f:
+        f.write(dumps(json))
+    pass
