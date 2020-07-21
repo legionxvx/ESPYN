@@ -1,31 +1,18 @@
 from enum import IntEnum, auto
 
 from espyn.sports.base import Sport
+from espyn.sports.leagues import CFB, NFL, XFL
 
-
-class SeasonType(IntEnum):
-    PRESEASON = 1
-    REGULAR = 2
-    BOWLS = 3
 
 class Football(Sport):
 
     def __init__(self):
-        super().__init__(
-            name="football",
-            leagues=[
-                "nfl",
-                "xfl",
-                "college-football"
-            ]
-        )
+        super().__init__(name="football", leagues=[NFL(), XFL(), CFB()])
 
         self._league = None
 
         if self.leagues:
             self._league = self.leagues[0]
-
-        self.season = SeasonType.REGULAR
 
     @property
     def league(self):

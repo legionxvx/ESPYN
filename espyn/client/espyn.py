@@ -3,18 +3,6 @@ from urllib.parse import urljoin
 from requests import Session
 
 
-class Sport(object):
-    FOOTBALL = "football"
-    BASEBALL = "baseball"
-    BASKETBALL = "basketball"
-
-
-class League(object):
-    NFL = "nfl"
-    XFL = "xfl"
-    COLLEGE_FOOTBALL = "college-football"
-
-
 class ESPYN(Session):
 
     def __init__(self, sport=None):
@@ -40,7 +28,7 @@ class ESPYN(Session):
             # Hardcoded for now
             "https://site.api.espn.com/apis/site/v2/sports/",
             self.sport.name,
-            self.sport.league
+            self.sport.league.name
         )
 
     def request(self, method, suffix, *args, **kwargs):
@@ -48,4 +36,8 @@ class ESPYN(Session):
         return super().request(method, url, *args, **kwargs)
 
     def get_scoreboard(self, *args, **kwargs):
+        kwargs["seasontype"] = kwargs.get(
+            "seasontype", 
+            self.sport.league.season
+        )
         return self.get("scoreboard", *args, **kwargs)
