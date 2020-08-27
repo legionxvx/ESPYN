@@ -8,6 +8,12 @@ def test_espyn_client_basic():
     assert(fb.league in espyn.prefix)
     assert(fb.name in espyn.prefix)
 
+    espyn.sport.league = "college-football"
+    fb.league = "college-football"
+
+    assert(fb.league in espyn.prefix)
+    assert(fb.name in espyn.prefix)
+
 def test_client_get():
     espyn = ESPYN(sport=Football())
     res = espyn.get("scoreboard")
