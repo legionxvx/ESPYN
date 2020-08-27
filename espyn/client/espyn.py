@@ -3,13 +3,14 @@ from json import JSONDecodeError
 from urllib.parse import urljoin
 
 from requests import Session
-from requests.exceptions import HTTPError
+
 
 def _maybe_decode_response_json(res):
     try:
         return res.json()
     except (JSONDecodeError):
         return res
+
 
 def json(default=None):
     def wrapper(fn, *args, **kwargs):
@@ -57,7 +58,7 @@ class ESPYN(Session):
     def get_scoreboard(self, *args, **kwargs):
         params = kwargs["params"] = kwargs.get("params", {})
         params["seasontype"] = params.get(
-            "seasontype", 
+            "seasontype",
             self.sport.league.season
         )
         return self.get("scoreboard", *args, **kwargs)
