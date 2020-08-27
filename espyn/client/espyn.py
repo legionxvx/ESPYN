@@ -1,6 +1,25 @@
+from functools import wraps
+from json import JSONDecodeError
 from urllib.parse import urljoin
 
 from requests import Session
+
+
+def _maybe_decode_response_json(res):
+    try:
+        return res.json()
+    except (JSONDecodeError):
+        return res
+
+
+def json(default=None):
+    def wrapper(fn, *args, **kwargs):
+        @wraps(fn)
+        def wrapped(*args, **kwargs):
+            res = fn(*args, **kwargs)
+            return _maybe_decode_response_json(res) or default
+        return wrapped
+    return wrapper
 
 
 class ESPYN(Session):
@@ -35,9 +54,11 @@ class ESPYN(Session):
         url = urljoin(self.prefix, suffix)
         return super().request(method, url, *args, **kwargs)
 
+    @json(default={})
     def get_scoreboard(self, *args, **kwargs):
-        kwargs["seasontype"] = kwargs.get(
-            "seasontype", 
+        params = kwargs["params"] = kwargs.get("params", {})
+        params["seasontype"] = params.get(
+            "seasontype",
             self.sport.league.season
         )
         return self.get("scoreboard", *args, **kwargs)
