@@ -24,7 +24,6 @@ def test_client_get():
 def test_client_get_scoreboard():
     espyn = ESPYN(sport=Football())
     res = espyn.get_scoreboard()
-    json = res.json()
     with open("scoreboard.json", "w") as f:
         f.write(dumps(json))
     pass
